@@ -20,8 +20,10 @@ align-items: center;
 justify-content: center;
 width: 100%;
 height: 150px;
-background: url(${pokeball}) no-repeat 0% 100% / clamp(25rem,25rem,25rem);
+background: url(${pokeball}) no-repeat 0% 80% / clamp(25rem,25rem,25rem);
+overflow: hidden;
 gap: 1rem;
+border-radius: 1rem;
 `
 
 export const Info = styled.div`
