@@ -9,17 +9,18 @@ import {
     PokedexNumber,
     PokemonImageContainer
 } from './styles'
-import { useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useMemo, useState } from 'react'
 import api from '../../service/api'
-import { addCache, getData } from '../../store/requestSlice'
-
+import { spritesTypesTheme } from '../../utils/spritesTypeTheme'
 interface IPokemon {
     id: number;
     name: string;
-    types: [
+    types:
+    {
+        slot: number
         type: { name: string; }
-    ]
+    }[]
+    ,
     sprites: {
         other: {
             home: {
@@ -28,45 +29,37 @@ interface IPokemon {
         };
     }
 }
-interface ICard extends Omit<IPokemon, 'sprites'> {
-    sprite: string
-}
-
 interface ICardProps {
     name: string
 }
 
 const Card: React.FC<ICardProps> = ({ name }) => {
-    const dispatch = useDispatch()
-
-    const storePokemon = useSelector(getData(`/pokemon/${name}`)) as ICard
+    const [pokemonInfo, setPokemonInfo] = useState<IPokemon>()
 
     const pokemon = useMemo(() => {
-        if (!storePokemon) return {} as IPokemon
-        return storePokemon
-    }, [storePokemon]) as IPokemon
+        if (!pokemonInfo) return null
+        return pokemonInfo
+    }, [pokemonInfo]) as IPokemon
 
     useEffect(() => {
         api.get<IPokemon>(`/pokemon/${name}`)
             .then(response => {
-                console.log('response', response)
-
-                dispatch(addCache({
-                    endpoint: `/pokemon/${name}`,
-                    data: response.data
-                }))
+                setPokemonInfo(response.data)
             })
 
-    }, [dispatch, name])
+    }, [name])
 
+    if (!pokemonInfo) {
+        return <h1>no data</h1>
+    }
     return (
-        <Container>
+        <Container type={pokemon.types[0].type.name}>
             <Content>
                 <Info>
-                    <Name>{pokemon.name}</Name>
+                    <Name>{pokemon.name.toLocaleUpperCase()}</Name>
                     <TypesContainer>
                         {pokemon.types.map(t => (
-                            <Type src={t.name} />
+                            <Type key={t.slot} src={spritesTypesTheme(t.type.name)} />
                         ))}
                     </TypesContainer>
                 </Info>
@@ -74,7 +67,7 @@ const Card: React.FC<ICardProps> = ({ name }) => {
                     <PokemonImage src={pokemon.sprites.other.home.front_default} />
                 </PokemonImageContainer>
                 <PokedexNumber>
-                    {pokemon.id}
+                    #{pokemon.id}
                 </PokedexNumber>
             </Content>
         </Container>

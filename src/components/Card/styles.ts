@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import pokeball from '../../assets/pokeball.svg'
+import { typesTheme } from '../../utils/typesTheme';
 
+interface IType {
+    type: string;
+}
 
-export const Container = styled.div`
+export const Container = styled.div<IType>`
 max-width: 350px;
 width: 100%;
 height: 150px;
@@ -12,6 +16,7 @@ align-items: center;
 justify-content: center;
 position: relative;
 background: whitesmoke;
+background: ${props => typesTheme(props.type)};
 `
 
 export const Content = styled.div`
@@ -34,9 +39,13 @@ flex-direction: column;
 `
 
 export const Name = styled.strong`
-font-size: 1.5rem;
-font-weight: 500;
+font-size: 1.6rem;
+font-weight: 900;
 margin-bottom: 0.5rem;
+-webkit-text-stroke-width: 1px; /* largura da borda */
+-webkit-text-stroke-color: #000; /* cor da borda */
+color: #F0FFFF ;
+
 `
 
 export const TypesContainer = styled.div`
@@ -44,9 +53,11 @@ display: flex;
 gap: 5px;
 `
 
+
+
 export const Type = styled.img`
-width: 70px;
-height: 30px;
+width: min-content;
+height: min-content;
 `
 export const PokemonImageContainer = styled.div`
 width: 140px;
@@ -67,9 +78,13 @@ cursor: pointer;
 `
 
 export const PokedexNumber = styled.span`
+font-size: 1.5rem;
 display: block;
 position: absolute;
-top: 1rem;
-right: 1rem;
-font-weight: 500;
+top: 0.5rem;
+right: 0.5rem;
+font-weight: 900;
+-webkit-text-stroke-width: 1px; /* largura da borda */
+-webkit-text-stroke-color: #000; /* cor da borda */
+color: #F0FFFF ;
 `
