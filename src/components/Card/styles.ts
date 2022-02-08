@@ -7,9 +7,9 @@ interface IType {
 }
 
 export const Container = styled.div<IType>`
-max-width: 350px;
+max-width: 500px;
 width: 100%;
-height: 150px;
+height: 180px;
 border-radius: 1rem;
 display: flex;
 align-items: center;
@@ -24,8 +24,8 @@ display: flex;
 align-items: center;
 justify-content: center;
 width: 100%;
-height: 150px;
-background: url(${pokeball}) no-repeat 0% 80% / clamp(25rem,25rem,25rem);
+height: 180px;
+background: url(${pokeball}) no-repeat 0% 80% / clamp(28rem,25rem,25rem);
 overflow: hidden;
 gap: 1rem;
 border-radius: 1rem;
@@ -39,7 +39,7 @@ flex-direction: column;
 `
 
 export const Name = styled.strong`
-font-size: 1.6rem;
+font-size: 1.8rem;
 font-weight: 900;
 margin-bottom: 0.5rem;
 -webkit-text-stroke-width: 1px; /* largura da borda */
@@ -56,12 +56,17 @@ gap: 5px;
 
 
 export const Type = styled.img`
-width: min-content;
-height: min-content;
+width: fit-content;
+height: fit-content;
 `
 export const PokemonImageContainer = styled.div`
-width: 140px;
-height: 140px;
+width: 180px;
+height: 180px;
+`
+
+export const Button = styled.button`
+background: inherit;
+border: none;
 `
 
 export const PokemonImage = styled.img`
@@ -78,11 +83,11 @@ cursor: pointer;
 `
 
 export const PokedexNumber = styled.span`
-font-size: 1.5rem;
+font-size: 1.8rem;
 display: block;
 position: absolute;
-top: 0.5rem;
-right: 0.5rem;
+top: 1rem;
+right: 1rem;
 font-weight: 900;
 -webkit-text-stroke-width: 1px; /* largura da borda */
 -webkit-text-stroke-color: #000; /* cor da borda */

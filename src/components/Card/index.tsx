@@ -7,34 +7,22 @@ import {
     Type,
     PokemonImage,
     PokedexNumber,
-    PokemonImageContainer
+    PokemonImageContainer,
+    Button
 } from './styles'
 import { useEffect, useMemo, useState } from 'react'
 import api from '../../service/api'
 import { spritesTypesTheme } from '../../utils/spritesTypeTheme'
-interface IPokemon {
-    id: number;
-    name: string;
-    types:
-    {
-        slot: number
-        type: { name: string; }
-    }[]
-    ,
-    sprites: {
-        other: {
-            home: {
-                front_default: string;
-            }
-        };
-    }
-}
+import { useNavigate } from 'react-router-dom'
+import { IPokemon } from '../../DTO/IPokemonDTO'
+
 interface ICardProps {
     name: string
 }
 
 const Card: React.FC<ICardProps> = ({ name }) => {
     const [pokemonInfo, setPokemonInfo] = useState<IPokemon>()
+    let navigate = useNavigate();
 
     const pokemon = useMemo(() => {
         if (!pokemonInfo) return null
@@ -64,7 +52,9 @@ const Card: React.FC<ICardProps> = ({ name }) => {
                     </TypesContainer>
                 </Info>
                 <PokemonImageContainer>
-                    <PokemonImage src={pokemon.sprites.other.home.front_default} />
+                    <Button onClick={() => navigate(`/status/${pokemon.name}`)}>
+                        <PokemonImage src={pokemon.sprites.other.home.front_default} />
+                    </Button>
                 </PokemonImageContainer>
                 <PokedexNumber>
                     #{pokemon.id}
