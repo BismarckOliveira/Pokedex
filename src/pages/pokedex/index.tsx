@@ -13,7 +13,7 @@ interface IPokemon {
 }
 
 const Pokedex: React.FC = () => {
-    const NUMBER_POKEMONS = 150
+    const NUMBER_POKEMONS = 1
     const [pokemons, setPokemons] = useState<IPokemon[]>(() => {
         const loadPokemons = localStorage.getItem('@Pokemons')
 

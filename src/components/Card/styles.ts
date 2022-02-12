@@ -25,7 +25,7 @@ align-items: center;
 justify-content: center;
 width: 100%;
 height: 180px;
-background: url(${pokeball}) no-repeat 0% 80% / clamp(28rem,25rem,25rem);
+background: url(${pokeball}) no-repeat -10% 60% / clamp(28rem,25rem,25rem);
 overflow: hidden;
 gap: 1rem;
 border-radius: 1rem;
@@ -50,14 +50,13 @@ color: #F0FFFF ;
 
 export const TypesContainer = styled.div`
 display: flex;
+flex-direction: column;
 gap: 5px;
+position: relative;
 `
-
-
-
 export const Type = styled.img`
-width: fit-content;
-height: fit-content;
+width: 79px;
+height: 27px;
 `
 export const PokemonImageContainer = styled.div`
 width: 180px;

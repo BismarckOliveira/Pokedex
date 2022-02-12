@@ -1,6 +1,11 @@
 export interface IPokemon {
     id: number;
     name: string;
+    abilities: {
+        ability: {
+            name: string,
+        },
+    }[]
     types:
     {
         slot: number
@@ -17,6 +22,11 @@ export interface IPokemon {
     stats: {
         base_stat: number
         stat: { name: string }
+    }[],
+    moves: {
+        move: {
+            name: string,
+        },
     }[]
 
 }
